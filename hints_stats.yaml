@@ -1,0 +1,17 @@
+---
+-
+  # Target: where our play will run and options it will run with
+  hosts: all
+  user: root
+  gather_facts: false
+ 
+  tasks:
+    - name: collect cassandra hints statistics
+      script: hints_stats.py
+      args:
+        executable: python3
+      register: shell_result
+      
+    - debug:
+        var: shell_result.stdout_lines
+...
